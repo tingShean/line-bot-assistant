@@ -10,3 +10,5 @@ export CHANNEL_TOKEN=<your_line_channel_token>
 export PORT=<your_server_port>
 export GOOGLE_SHEET_ID=<your_google_sheet_id>
 ```
+
+Google Sheet need create new and change Sheet name to task

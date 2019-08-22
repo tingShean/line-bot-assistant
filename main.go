@@ -51,7 +51,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Println("Quota err:", err)
 				}
 				// free account
-				if quota.Value >= 500 {
+				if quota.Value >= int64(500) {
 					log.Println("Quota not enough!")
 				}
 				err = msgFunc(event.ReplyToken, message.Text)
@@ -64,6 +64,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func msgFunc(token, msg string) error {
-	_, err := bot.ReplyMessage(token, linebot.NewTextMessage(msg)).Do()
+	//log.Println(token)
+
+	// parse endpoint
+	res_msg, err := ParseMessage(msg)
+	if err != nil {
+		return err
+	}
+
+	_, err = bot.ReplyMessage(token, linebot.NewTextMessage(res_msg)).Do()
 	return err
 }
